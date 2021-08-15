@@ -1,0 +1,23 @@
+{
+  "name": "planning-center-export",
+  "version": "0.1.0",
+  "description": "Export data from Planning Center",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johngully/planning-center-export.git"
+  },
+  "keywords": [
+    "planning-center",
+    "planningcenter"
+  ],
+  "author": "John Gully",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/johngully/planning-center-export/issues"
+  },
+  "homepage": "https://github.com/johngully/planning-center-export#readme"
+}
