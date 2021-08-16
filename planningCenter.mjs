@@ -1,4 +1,5 @@
 import fs from "fs";
+import _ from "lodash";
 import { PlanningCenterEntities, PlanningCenterExportFormats } from "./planningCenterEnums.mjs";
 // import csvAdapters from "./adapters/csv/index.mjs";
 import jsonAdapters from "./adapters/json/index.mjs";
@@ -7,6 +8,7 @@ import { config } from "dotenv";
 const defaultConfig = {
   apiKey: "",
   secret: "",
+  pageSize: 25,
   exportFormat: PlanningCenterExportFormats.JSON,
   allowFileOverwrite: true
 };
@@ -45,7 +47,7 @@ class PlanningCenter {
   config = {};
 
   constructor(config) {
-    this.config = { ...defaultConfig, ...config };
+    this.config = _.defaultsDeep(config, defaultConfig)
     validateConfig(this.config);
   }
 
