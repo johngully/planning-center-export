@@ -9,21 +9,20 @@ const pageSize = process.env.PLANNING_CENTER_PAGE_SIZE;
 const planningCenterConfig = { applicationId, secret, pageSize };
 const planningCenterExport = new PlanningCenter(planningCenterConfig);
 
-// // Write all Groups to "./groups.json"
-const groupsFilePath = "./groups.json";
-const groupsResult = await planningCenterExport.export(PlanningCenterEntities.GROUPS, groupsFilePath);
-console.log(`${PlanningCenterEntities.GROUPS} Export complete`)
-console.log(`  ${groupsResult.totalCount} records written to: `, groupsFilePath);
+// exportCsv(PlanningCenterEntities.GROUPS);
+// exportCsv(PlanningCenterEntities.GROUP_MEMBERS);
+// exportCsv(PlanningCenterEntities.GROUP_TYPES);
+// exportCsv(PlanningCenterEntities.PEOPLE);
 
-// Write all Groups Members to "./group-members.json"
-const groupMembersFilePath = "./group-members.json";
-const groupMembersResult = await planningCenterExport.export(PlanningCenterEntities.GROUP_MEMBERS, groupMembersFilePath);
-console.log(`${PlanningCenterEntities.GROUP_MEMBERS} Export complete`)
-console.log(`  ${groupMembersResult.totalCount} records written to: `, groupMembersFilePath);
-console.log(`  ${groupMembersResult.totalCount} members in ${groupMembersResult.parentTotalCount} groups`);
 
-// // Write all Groups to "./group-types.json"
-const groupTypesFilePath = "./group-types.json";
-const groupTypesResult = await planningCenterExport.export(PlanningCenterEntities.GROUP_TYPES, groupTypesFilePath);
-console.log(`${PlanningCenterEntities.GROUP_TYPES} Export complete`)
-console.log(`  ${groupTypesResult.totalCount} records written to: `, groupTypesFilePath);
+
+
+async function exportCsv(entity, filePath) {
+  filePath = filePath || `./export/${entity}.json`;
+  const result = await planningCenterExport.export(entity, filePath);
+  console.log(`${entity} Export complete`);
+  console.log(`  ${result.totalCount} records written to:`, filePath);
+  if (result.parentTotalCount) {
+    console.log(`  ${result.totalCount} members in ${result.parentTotalCount} groups`);
+  }
+}
