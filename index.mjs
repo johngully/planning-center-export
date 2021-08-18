@@ -21,3 +21,9 @@ const groupMembersResult = await planningCenterExport.export(PlanningCenterEntit
 console.log(`${PlanningCenterEntities.GROUP_MEMBERS} Export complete`)
 console.log(`  ${groupMembersResult.groupMembersTotalCount} records written to: `, groupMembersFilePath);
 console.log(`  ${groupMembersResult.groupMembersTotalCount} members in ${groupMembersResult.groupsTotalCount} groups`);
+
+// Write all Groups to "./group-types.json"
+const groupTypesFilePath = "./group-types.json";
+const groupTypesResult = await planningCenterExport.export(PlanningCenterEntities.GROUP_TYPES, groupTypesFilePath);
+console.log(`${PlanningCenterEntities.GROUP_TYPES} Export complete`)
+console.log(`  ${groupTypesResult.totalCount} records written to: `, groupTypesFilePath);
