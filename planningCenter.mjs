@@ -33,14 +33,20 @@ function validateEntity(entity) {
 }
 
 function getAdapter(format, entity) {
+  let adapter;
   switch(format) {
     case PlanningCenterExportFormats.CSV:
-      return csvAdapters[entity];
+      adapter = csvAdapters[entity];
       break;
     case PlanningCenterExportFormats.JSON:
-      return jsonAdapters[entity];
+      adapter = jsonAdapters[entity];
       break;
   }
+
+  if (adapter === undefined) {
+    throw new Error(`A ${format} adapter for ${entity} could not be found`);
+  }
+  return adapter;
 }
 
 class PlanningCenter {
