@@ -1,9 +1,8 @@
-import fs from "fs";
 import _ from "lodash";
+import { cleanupExistingFiles } from "./planningCenterDataWriter.mjs";
 import { PlanningCenterEntities, PlanningCenterExportFormats } from "./planningCenterEnums.mjs";
 // import csvAdapters from "./adapters/csv/index.mjs";
 import jsonAdapters from "./adapters/json/index.mjs";
-import { config } from "dotenv";
 
 const defaultConfig = {
   apiKey: "",
@@ -33,13 +32,14 @@ function validateEntity(entity) {
   }
 }
 
-function cleanupExistingFiles(allowFileOverwrite, path) {
-  if (fs.existsSync(path)) {
-    if (allowFileOverwrite) {
-      fs.unlinkSync(path);
-    } else {
-      throw new Error(`The file: "${path}" aleady exists and the current configuration prohibits overwriting.  Change the output file path or set "allowFileOverwrite = true"`);
-    }
+function getAdapter(format, entity) {
+  switch(format) {
+    case PlanningCenterExportFormats.CSV:
+      return csvAdapters[entity];
+      break;
+    case PlanningCenterExportFormats.JSON:
+      return jsonAdapters[entity];
+      break;
   }
 }
 
@@ -52,7 +52,7 @@ class PlanningCenter {
   }
 
   async export(entity, path) {
-    cleanupExistingFiles(this.config.allowFileOverwrite, path);
+    cleanupExistingFiles(path, this.config.allowFileOverwrite);
     const format = this.config.exportFormat;
     switch(format) {
       case PlanningCenterExportFormats.CSV:
@@ -77,14 +77,3 @@ class PlanningCenter {
 }
 
 export { PlanningCenter, PlanningCenterEntities, PlanningCenterExportFormats }
-
-function getAdapter(format, entity) {
-  switch(format) {
-    case PlanningCenterExportFormats.CSV:
-      return csvAdapters[entity];
-      break;
-    case PlanningCenterExportFormats.JSON:
-      return jsonAdapters[entity];
-      break;
-  }
-}

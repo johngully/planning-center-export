@@ -1,10 +1,11 @@
 import { URL } from "url"
 import fetch from "node-fetch"
 
-async function handleErrors(error, delay) {
-  if (error.code == 429) {
+async function handleErrors(errors, delay) {
+  if (errors[0].code == 429) {
     console.debug("Sleeping for 20 seconds due to api rate limiting");
     await sleep(delay)
+    console.debug("Resuming after waiting for rate limit")
   } else {
     throw new Error(error);
   }
@@ -45,39 +46,40 @@ export class PlanningCenterApiHelper {
   }
 
   async getAll(url, perPageCallback) {
-    let offset = 0;
-    let totalCount = 0;
+    const page = {
+      count: 0,
+      offset: 0,
+      totalCount: 0,
+    }
   
     do {
       const getUrl = new URL(url);
-      getUrl.searchParams.append("offset", offset);
+      getUrl.searchParams.append("offset", page.offset);
       const result = await this.get(getUrl);
       
       // Exit the loop if there is an error
-      // Wait if the API is rate limited, and skip the increment
+      // Wait if the API is rate limited, and try again in 20 seconds
       if (result.errors) {
         await handleErrors(result.errors, this.apiRateLimitDelayMs);
-  
-      // Increment to the next page of data
       } else {
-        // Execute the optional callback to process 
-        // the data for the current page
+        // Get the total count, and the index of the next page of data
+        page.count = result.meta.count;
+        page.offset = result.meta.next?.offset;
+        page.totalCount = result.meta.total_count;
+        
+        // Execute the optional callback to process the data for the current page.
         if (perPageCallback) {
-          await perPageCallback(result);
-        }
-        offset = result.meta.next?.offset;
-        totalCount = result.meta.total_count;
+          await perPageCallback(result, page);
+        }        
       }
       
-    } while (offset)
+    } while (page.offset)
   
     return {
-      totalCount
+      totalCount: page.totalCount
     };
   }
 
 }
 
 export default PlanningCenterApiHelper;
-
-

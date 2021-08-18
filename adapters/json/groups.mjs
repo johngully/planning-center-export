@@ -1,17 +1,16 @@
 import fetch from "node-fetch";
-import fs from "fs";
+import { startJsonFile, appendJsonToFile, endJsonFile } from "../../planningCenterDataWriter.mjs";
 import PlanninerCenterApiHelper from "../../planningCenterApiHelper.mjs";
 
 const url = "https://api.planningcenteronline.com/groups/v2/groups";
 
 export async function groups(config, filePath) {
   const api = new PlanninerCenterApiHelper(config.apiKey, config.secret, config.pageSize);
-  const result = await api.getAll(url, json => {
-    // const data = json.data.map(item => {
-    //   return { id: item.id, ...item.attributes }
-    // });
-    fs.appendFileSync(filePath, JSON.stringify(json.data));  
+  startJsonFile(filePath);
+  const result = await api.getAll(url, (json, page) => {
+    appendJsonToFile(filePath, json.data, page);
   });
+  endJsonFile(filePath);
   return result;
 }
 
