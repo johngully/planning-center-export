@@ -5,7 +5,7 @@ import { PlanningCenterEntities, PlanningCenterExportFormats } from "./planningC
 import jsonAdapters from "./adapters/json/index.mjs";
 
 const defaultConfig = {
-  apiKey: "",
+  applicationId: "",
   secret: "",
   pageSize: 25,
   exportFormat: PlanningCenterExportFormats.JSON,
@@ -13,8 +13,8 @@ const defaultConfig = {
 };
 
 function validateConfig(config) {
-  if (!config.apiKey) {
-    throw new Error(`The PlanningCenter "apiKey" must be provided in order to export data`);
+  if (!config.applicationId) {
+    throw new Error(`The PlanningCenter "applicationId" must be provided in order to export data`);
   }
 
   if (!config.secret) {

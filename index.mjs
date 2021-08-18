@@ -2,11 +2,11 @@ import dotenv from "dotenv";
 import { PlanningCenter, PlanningCenterEntities } from "./planningCenter.mjs"
 
 dotenv.config();
-const apiKey = process.env.PLANNING_CENTER_API_KEY;
+const applicationId = process.env.PLANNING_CENTER_APPLICATION_ID;
 const secret = process.env.PLANNING_CENTER_SECRET;
 const pageSize = process.env.PLANNING_CENTER_PAGE_SIZE;
 
-const planningCenterConfig = { apiKey, secret, pageSize };
+const planningCenterConfig = { applicationId, secret, pageSize };
 const planningCenterExport = new PlanningCenter(planningCenterConfig);
 
 // Write all Groups to "./groups.json"

@@ -18,20 +18,20 @@ async function sleep(ms) {
 }  
 
 export class PlanningCenterApiHelper {
-  apiKey;
+  applicationId;
   secret;
   pageSize;
   apiRateLimitDelayMs = 20 * 1000
 
-  constructor(apiKey, secret, pageSize) {
-    this.apiKey = apiKey;
+  constructor(applicationId, secret, pageSize) {
+    this.applicationId = applicationId;
     this.secret = secret;
     this.pageSize = pageSize;
   }
 
-  async get(url, ) {
+  async get(url) {
     const method = "get";
-    const authorization = "Basic " + Buffer.from(this.apiKey+":"+this.secret).toString('base64');
+    const authorization = "Basic " + Buffer.from(this.applicationId+":"+this.secret).toString('base64');
     const getUrl = new URL(url);
     getUrl.searchParams.append("per_page", this.pageSize);
     

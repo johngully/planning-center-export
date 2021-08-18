@@ -5,7 +5,7 @@ const url = "https://api.planningcenteronline.com/groups/v2/groups";
 const groupMembersSlug = "memberships";
 
 export async function groupMembers (config, filePath) {  
-  const api = new PlanninerCenterApiHelper(config.apiKey, config.secret, config.pageSize);
+  const api = new PlanninerCenterApiHelper(config.applicationId, config.secret, config.pageSize);
 
   // Get all the groups
   let groupMembersResultAggregate = { totalCount: 0};
