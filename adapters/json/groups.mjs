@@ -14,9 +14,4 @@ export async function groups(config, filePath) {
   return result;
 }
 
-
-function transform(json) {
-
-}
-
 export default groups;
