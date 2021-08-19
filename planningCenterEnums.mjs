@@ -1,11 +1,12 @@
 export const PlanningCenterEntities = {
-  GROUPS: "GROUPS",
-  GROUP_MEMBERS: "GROUP_MEMBERS",
-  GROUP_TYPES: "GROUP_TYPES",
-  PEOPLE: "PEOPLE"
+  groups: "groups",
+  groupMembers: "groupMembers",
+  groupTypes: "groupTypes",
+  households: "households",
+  people: "people"
 }
 
 export const PlanningCenterExportFormats = {
-  CSV: "CSV",
-  JSON: "JSON"
+  csv: "csv",
+  json: "json"
 }

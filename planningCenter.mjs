@@ -1,14 +1,13 @@
 import _ from "lodash";
 import { cleanupExistingFiles } from "./planningCenterDataWriter.mjs";
 import { PlanningCenterEntities, PlanningCenterExportFormats } from "./planningCenterEnums.mjs";
-// import csvAdapters from "./adapters/csv/index.mjs";
-import jsonAdapters from "./adapters/json/index.mjs";
+import { jsonAdapters } from "./adapters/index.mjs";
 
 const defaultConfig = {
   applicationId: "",
   secret: "",
   pageSize: 25,
-  exportFormat: PlanningCenterExportFormats.JSON,
+  exportFormat: PlanningCenterExportFormats.json,
   allowFileOverwrite: true
 };
 
@@ -35,10 +34,10 @@ function validateEntity(entity) {
 function getAdapter(format, entity) {
   let adapter;
   switch(format) {
-    case PlanningCenterExportFormats.CSV:
+    case PlanningCenterExportFormats.csv:
       adapter = csvAdapters[entity];
       break;
-    case PlanningCenterExportFormats.JSON:
+    case PlanningCenterExportFormats.json:
       adapter = jsonAdapters[entity];
       break;
   }
@@ -61,7 +60,7 @@ class PlanningCenter {
     cleanupExistingFiles(path, this.config.allowFileOverwrite);
     const format = this.config.exportFormat;
     switch(format) {
-      case PlanningCenterExportFormats.CSV:
+      case PlanningCenterExportFormats.csv:
         return await this.exportAsCsv(entity, path);
         break;
       default:

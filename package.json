@@ -23,6 +23,7 @@
   "homepage": "https://github.com/johngully/planning-center-export#readme",
   "dependencies": {
     "dotenv": "^10.0.0",
+    "esm-import-directory": "^2.4.0",
     "lodash": "^4.17.21",
     "node-fetch": "^2.6.1"
   }

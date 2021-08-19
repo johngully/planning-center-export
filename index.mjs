@@ -9,12 +9,11 @@ const pageSize = process.env.PLANNING_CENTER_PAGE_SIZE;
 const planningCenterConfig = { applicationId, secret, pageSize };
 const planningCenterExport = new PlanningCenter(planningCenterConfig);
 
-// exportCsv(PlanningCenterEntities.GROUPS);
-// exportCsv(PlanningCenterEntities.GROUP_MEMBERS);
-// exportCsv(PlanningCenterEntities.GROUP_TYPES);
-// exportCsv(PlanningCenterEntities.PEOPLE);
-
-
+exportCsv(PlanningCenterEntities.groups);
+exportCsv(PlanningCenterEntities.groupMembers);
+exportCsv(PlanningCenterEntities.groupTypes);
+exportCsv(PlanningCenterEntities.people);
+exportCsv(PlanningCenterEntities.households);
 
 
 async function exportCsv(entity, filePath) {
