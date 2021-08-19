@@ -10,17 +10,17 @@ const planningCenterConfig = { applicationId, secret, pageSize };
 const planningCenterExport = new PlanningCenter(planningCenterConfig);
 
 await exportCsv(PlanningCenterEntities.campuses);
-await exportCsv(PlanningCenterEntities.checkins);
-await exportCsv(PlanningCenterEntities.emails);
-await exportCsv(PlanningCenterEntities.events);
-await exportCsv(PlanningCenterEntities.eventTimes);
-await exportCsv(PlanningCenterEntities.groupMembers);
-await exportCsv(PlanningCenterEntities.groups);
-await exportCsv(PlanningCenterEntities.groupTypes);
-await exportCsv(PlanningCenterEntities.headcounts);
-await exportCsv(PlanningCenterEntities.households);
-await exportCsv(PlanningCenterEntities.people);
-await exportCsv(PlanningCenterEntities.peopleStats);
+// await exportCsv(PlanningCenterEntities.checkins);
+// await exportCsv(PlanningCenterEntities.emails);
+// await exportCsv(PlanningCenterEntities.events);
+// await exportCsv(PlanningCenterEntities.eventTimes);
+// await exportCsv(PlanningCenterEntities.groupMembers);
+// await exportCsv(PlanningCenterEntities.groups);
+// await exportCsv(PlanningCenterEntities.groupTypes);
+// await exportCsv(PlanningCenterEntities.headcounts);
+// await exportCsv(PlanningCenterEntities.households);
+// await exportCsv(PlanningCenterEntities.people);
+// await exportCsv(PlanningCenterEntities.peopleStats);
 
 
 async function exportCsv(entity, filePath) {
