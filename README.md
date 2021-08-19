@@ -25,10 +25,10 @@ const secret = process.env.PLANNING_CENTER_SECRET;
 // Export the GROUPS data as JSON
 const planningCenterConfig = { applicationId, secret };
 const planningCenterExport = new PlanningCenter(planningCenterConfig);
-const groupsResult = await planningCenterExport.export(PlanningCenterEntities.GROUPS, groupsFilePath);
+const groupsResult = await planningCenterExport.export(PlanningCenterEntities.groups, groupsFilePath);
 
 // Log the completion of the export
-console.log(`${PlanningCenterEntities.GROUPS} Export complete`)
+console.log(`${PlanningCenterEntities.groups} Export complete`)
 console.log(`  ${groupsResult.totalCount} records written to: `, groupsFilePath);
 ```
 
