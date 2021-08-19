@@ -1,0 +1,7 @@
+/node_modules
+/export
+
+.env
+.DS_Store
+.vscode
+*test*.mjs
