@@ -2,3 +2,4 @@
 /export
 .env
 .DS_Store
+.vscode

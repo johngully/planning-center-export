@@ -63,4 +63,5 @@ class PlanningCenter {
 
 }
 
-export { PlanningCenter, PlanningCenterEntities }
+export { PlanningCenter, PlanningCenterEntities };
+export default PlanningCenter;

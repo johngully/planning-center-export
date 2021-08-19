@@ -4,7 +4,7 @@
   "description": "Export data from Planning Center",
   "main": "index.mjs",
   "scripts": {
-    "start": "./index.mjs",
+    "start": "./planningCenter.mjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
