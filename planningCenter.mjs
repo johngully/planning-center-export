@@ -8,6 +8,10 @@ const defaultConfig = {
   secret: "",
   pageSize: 25,
   exportFormat: PlanningCenterExportFormats.json,
+  exportAdapters: {
+    // csv: "adapters/csv",
+    json: jsonAdapters
+  },
   allowFileOverwrite: true
 };
 
@@ -31,16 +35,9 @@ function validateEntity(entity) {
   }
 }
 
-function getAdapter(format, entity) {
-  let adapter;
-  switch(format) {
-    case PlanningCenterExportFormats.csv:
-      adapter = csvAdapters[entity];
-      break;
-    case PlanningCenterExportFormats.json:
-      adapter = jsonAdapters[entity];
-      break;
-  }
+function getAdapter(entity, format, adapters) {
+  const formatAdapters = adapters[format] || {};
+  const adapter = formatAdapters[entity];
 
   if (adapter === undefined) {
     throw new Error(`A ${format} adapter for ${entity} could not be found`);
@@ -71,8 +68,8 @@ class PlanningCenter {
 
   async exportAsJson(entity, path) {
     validateEntity(entity);
-    const adapter = getAdapter(this.config.exportFormat, entity);
-    const result = await adapter(this.config, path);
+    const entityAdapter = getAdapter(entity, this.config.exportFormat, this.config.exportAdapters)
+    const result = await entityAdapter(this.config, path);
     return result;
   }
 
