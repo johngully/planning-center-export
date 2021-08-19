@@ -1,12 +1,14 @@
 export const PlanningCenterEntities = {
+  campuses: "campuses",
+  checkins: "checkins",
+  emails: "emails",
+  events: "events",
+  eventTimes: "eventTimes",
   groups: "groups",
   groupMembers: "groupMembers",
   groupTypes: "groupTypes",
+  headcounts: "headcounts",
   households: "households",
-  people: "people"
-}
-
-export const PlanningCenterExportFormats = {
-  csv: "csv",
-  json: "json"
+  people: "people",
+  peopleStats: "peopleStats"
 }

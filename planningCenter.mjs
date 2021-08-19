@@ -1,13 +1,13 @@
 import _ from "lodash";
 import { cleanupExistingFiles } from "./planningCenterDataWriter.mjs";
-import { PlanningCenterEntities, PlanningCenterExportFormats } from "./planningCenterEnums.mjs";
+import { PlanningCenterEntities } from "./planningCenterEnums.mjs";
 import { jsonAdapters } from "./adapters/index.mjs";
 
 const defaultConfig = {
   applicationId: "",
   secret: "",
   pageSize: 25,
-  exportFormat: PlanningCenterExportFormats.json,
+  exportFormat: "json",
   exportAdapters: {
     // csv: "adapters/csv",
     json: jsonAdapters
@@ -24,8 +24,8 @@ function validateConfig(config) {
     throw new Error(`The PlanningCenter "secret" must be provided in order to export data`);
   }
 
-  if (!PlanningCenterExportFormats[config.exportFormat]) {
-    throw new Error(`The "exportFormat" must be a valid PlanningCenterExportFormat`, PlanningCenterExportFormats);
+  if (!config.exportAdapters[config.exportFormat]) {
+    throw new Error(`The "exportFormat" must be a valid "exportAdapter" key`);
   }
 }
 
@@ -55,27 +55,12 @@ class PlanningCenter {
 
   async export(entity, path) {
     cleanupExistingFiles(path, this.config.allowFileOverwrite);
-    const format = this.config.exportFormat;
-    switch(format) {
-      case PlanningCenterExportFormats.csv:
-        return await this.exportAsCsv(entity, path);
-        break;
-      default:
-        return await this.exportAsJson(entity, path);
-        break;
-    }
-  }
-
-  async exportAsJson(entity, path) {
     validateEntity(entity);
     const entityAdapter = getAdapter(entity, this.config.exportFormat, this.config.exportAdapters)
     const result = await entityAdapter(this.config, path);
     return result;
   }
 
-  async exportAsCsv(entity, path) {
-    validateEntity(entity);
-  }
 }
 
-export { PlanningCenter, PlanningCenterEntities, PlanningCenterExportFormats }
+export { PlanningCenter, PlanningCenterEntities }
