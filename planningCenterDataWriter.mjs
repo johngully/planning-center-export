@@ -1,5 +1,21 @@
-import { appendFileSync, existsSync, openSync, closeSync, statSync, unlinkSync, writeSync } from "fs";
+import { appendFileSync, existsSync, openSync, closeSync, statSync, unlinkSync, truncateSync } from "fs";
 import { Buffer } from "buffer";
+
+function replaceAtEndOfFile(filePath, replaceString, withString) {
+  let fd;
+  try {
+    fd = openSync(filePath, "r+");
+    const currentLength = statSync(filePath).size;
+    if (currentLength > 1) {
+      truncateSync(filePath, currentLength-replaceString.length);
+      appendFileSync(filePath, withString);
+    }
+  } finally {
+    if (fd) {
+      closeSync(fd);
+    }
+  }
+}
 
 export function cleanupExistingFiles(filePath, allowFileOverwrite) {
   if (existsSync(filePath)) {
@@ -16,29 +32,15 @@ export function startJsonFile(filePath) {
 }
 
 export function endJsonFile(filePath) {
-  // Replace the last character in the file with a closing bracket "]"
   // Assumes this JSON file is an array and the last char is a training comma ","
-  let fd;
-  try {
-    fd = openSync(filePath, "r+");
-    const currentLength = statSync(filePath).size;
-    const buffer = Buffer.from("]", "utf-8");
-  
-    // Replace the last character in the file with a closing bracket "]"
-    if (currentLength > 1) {
-      writeSync(fd, buffer, 0, buffer.length, currentLength-1);
-    }
-  } finally {
-    if (fd) {
-      closeSync(fd);
-    }
-  }
+  // Replace the last character in the file with a closing bracket "]"
+  replaceAtEndOfFile(filePath, ",", "]")
 }
 
 export function appendJsonToFile(filePath, json, forceRawData) {
   const data = JSON.stringify(json);
   
-  // If the user as specified "false", simply write the JSON to the file
+  // If the user has specified "true", simply write the JSON to the file
   if (forceRawData === true) {
     appendFileSync(filePath, data);
     return;
