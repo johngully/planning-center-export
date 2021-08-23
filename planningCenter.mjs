@@ -1,7 +1,7 @@
 import _ from "lodash";
 import { cleanupExistingFiles } from "./planningCenterDataWriter.mjs";
 import { PlanningCenterEntities } from "./planningCenterEnums.mjs";
-import { jsonAdapters } from "./adapters/index.mjs";
+import { jsonAdapters, csvAdapters } from "./adapters/index.mjs";
 
 const defaultConfig = {
   applicationId: "",
@@ -9,7 +9,7 @@ const defaultConfig = {
   pageSize: 25,
   exportFormat: "json",
   exportAdapters: {
-    // csv: "adapters/csv",
+    csv: csvAdapters,
     json: jsonAdapters
   },
   allowFileOverwrite: true

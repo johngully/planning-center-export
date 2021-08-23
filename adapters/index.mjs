@@ -6,7 +6,8 @@ import importDirectory from "esm-import-directory";
 const dirname = path.dirname(import.meta.url.replace("file://", ""));
 const jsonAdapterPath = path.join(dirname, "json");
 export const jsonAdapters = await importDirectory(jsonAdapterPath, { paths: true });
-// const csvAdapterPath = path.join(dirname, "csv");
-// export const csvAdapters = await importDirectory(csvAdapterPath, { paths: true }); 
+
+const csvAdapterPath = path.join(dirname, "csv");
+export const csvAdapters = await importDirectory(csvAdapterPath, { paths: true }); 
 
 export default jsonAdapters;
