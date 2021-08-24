@@ -8,7 +8,8 @@ function createTemplateFromString(literal, params) {
 }
 
 function defaultCsvTransform(json) {
-  const selectedData = json.data.map(data => {
+  const data = Array.isArray(json.data) ? json.data : [json.data]
+  const selectedData = data.map(data => {
     return {
       id: data.id,
       ...data.attributes        
