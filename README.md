@@ -10,7 +10,7 @@ The inability to simply and reliably extract data from Planning Center for use i
 ### Installing the package
 `terminal`
 ```bash
-npm install planning-center-import
+npm install planning-center-export
 ```
 ### Basic Example Export to JSON
 `.js`

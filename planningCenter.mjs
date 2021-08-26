@@ -7,7 +7,7 @@ const defaultConfig = {
   applicationId: "",
   secret: "",
   pageSize: 25,
-  exportFormat: "json",
+  format: "json",
   exportAdapters: {
     csv: csvAdapters,
     json: jsonAdapters
@@ -24,8 +24,8 @@ function validateConfig(config) {
     throw new Error(`The PlanningCenter "secret" must be provided in order to export data`);
   }
 
-  if (!config.exportAdapters[config.exportFormat]) {
-    throw new Error(`The "exportFormat" must be a valid "exportAdapter" key`);
+  if (!config.exportAdapters[config.format]) {
+    throw new Error(`The "format" must be a valid "exportAdapter" key`);
   }
 }
 
@@ -56,7 +56,7 @@ class PlanningCenter {
   async export(entity, path) {
     cleanupExistingFiles(path, this.config.allowFileOverwrite);
     validateEntity(entity);
-    const entityAdapter = getAdapter(entity, this.config.exportFormat, this.config.exportAdapters)
+    const entityAdapter = getAdapter(entity, this.config.format, this.config.exportAdapters)
     const result = await entityAdapter(this.config, path);
     return result;
   }
