@@ -1,6 +1,6 @@
 {
   "name": "planning-center-export",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Export data from Planning Center",
   "main": "planningCenter.mjs",
   "scripts": {
