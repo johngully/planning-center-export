@@ -12,5 +12,6 @@ export const PlanningCenterEntities = {
   households: "households",
   notes: "notes",
   people: "people",
-  peopleStats: "peopleStats"
+  peopleStats: "peopleStats",
+  peopleTabs: "peopleTabs"
 }
