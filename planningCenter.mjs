@@ -53,14 +53,14 @@ class PlanningCenter {
     validateConfig(this.config);
   }
 
-  async export(entity, path) {
+  async export(entity, path, options) {
     cleanupExistingFiles(path, this.config.allowFileOverwrite);
     validateEntity(entity);
     const entityAdapter = getAdapter(entity, this.config.format, this.config.exportAdapters)
-    const result = await entityAdapter(this.config, path);
+    const result = await entityAdapter(this.config, path, options);
     return result;
   }
-
+  
 }
 
 export { PlanningCenter, PlanningCenterEntities };

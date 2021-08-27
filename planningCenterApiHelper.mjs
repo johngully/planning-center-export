@@ -29,7 +29,7 @@ export class PlanningCenterApiHelper {
     this.pageSize = pageSize;
   }
 
-  async get(url) {
+  async get(url, responseTransformationCallback) {
     const method = "get";
     const authorization = "Basic " + Buffer.from(this.applicationId+":"+this.secret).toString('base64');
     const getUrl = new URL(url);
@@ -37,7 +37,10 @@ export class PlanningCenterApiHelper {
     
     try {
       const response = await fetch(getUrl, { method: "get", headers: { authorization } });
-      const json = await response.json();
+      let json = await response.json();
+      if (responseTransformationCallback) {
+        json = await responseTransformationCallback(json);
+      }
       return json;
     } catch(error) {
       console.error(error);

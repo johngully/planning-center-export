@@ -25,17 +25,16 @@ await exportToFile(PlanningCenterEntities.campuses, planningCenterConfig);
 // await exportToFile(PlanningCenterEntities.households, planningCenterConfig);
 // await exportToFile(PlanningCenterEntities.people, planningCenterConfig);
 // await exportToFile(PlanningCenterEntities.peopleStats, planningCenterConfig);
+// await exportToFile(PlanningCenterEntities.peopleTabs, planningCenterConfig, { "tab": "custom_tab_slug_name" });
 
-async function exportToFile(entity, config, filePath) {
 
-  // If not specified, generate a filePath based upon the configuration
-  if (!filePath) {
-    const defaultFileName = `${entity}.${config.format}`;
-    const defaultFilePath = path.join(config.destination, defaultFileName); 
-    filePath = defaultFilePath;  
-  }
+async function exportToFile(entity, config, options) {
+  const tabName = options?.tab ? `-${options.tab}` : "";
+  const defaultFileName = `${entity}${tabName}.${config.format}`;
+  const defaultFilePath = path.join(config.destination, defaultFileName); 
+  const filePath = defaultFilePath;  
 
-  const result = await planningCenterExport.export(entity, filePath);
+  const result = await planningCenterExport.export(entity, filePath, options);
   console.log(`${entity} Export complete`);
   if (result.totalCount) {
     console.log(`  ${result.totalCount} records written to:`, filePath);
