@@ -10,6 +10,7 @@ export const PlanningCenterEntities = {
   groupTypes: "groupTypes",
   headcounts: "headcounts",
   households: "households",
+  notes: "notes",
   people: "people",
   peopleStats: "peopleStats"
 }

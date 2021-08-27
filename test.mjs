@@ -23,6 +23,7 @@ await exportToFile(PlanningCenterEntities.campuses, planningCenterConfig);
 // await exportToFile(PlanningCenterEntities.groupTypes, planningCenterConfig);
 // await exportToFile(PlanningCenterEntities.headcounts, planningCenterConfig);
 // await exportToFile(PlanningCenterEntities.households, planningCenterConfig);
+// await exportToFile(PlanningCenterEntities.notes, planningCenterConfig);
 // await exportToFile(PlanningCenterEntities.people, planningCenterConfig);
 // await exportToFile(PlanningCenterEntities.peopleStats, planningCenterConfig);
 
