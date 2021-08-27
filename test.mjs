@@ -12,6 +12,7 @@ const destination = process.env.PLANNING_CENTER_DESTINATION;
 const planningCenterConfig = { applicationId, secret, pageSize, format, destination };
 const planningCenterExport = new PlanningCenter(planningCenterConfig);
 
+// await exportToFile(PlanningCenterEntities.addresses, planningCenterConfig);
 await exportToFile(PlanningCenterEntities.campuses, planningCenterConfig);
 // await exportToFile(PlanningCenterEntities.checkins, planningCenterConfig);
 // await exportToFile(PlanningCenterEntities.emails, planningCenterConfig);
@@ -24,7 +25,6 @@ await exportToFile(PlanningCenterEntities.campuses, planningCenterConfig);
 // await exportToFile(PlanningCenterEntities.households, planningCenterConfig);
 // await exportToFile(PlanningCenterEntities.people, planningCenterConfig);
 // await exportToFile(PlanningCenterEntities.peopleStats, planningCenterConfig);
-
 
 async function exportToFile(entity, config, filePath) {
 

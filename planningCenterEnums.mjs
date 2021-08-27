@@ -1,4 +1,5 @@
 export const PlanningCenterEntities = {
+  addresses: "addresses",
   campuses: "campuses",
   checkins: "checkins",
   emails: "emails",
