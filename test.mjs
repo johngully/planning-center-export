@@ -13,7 +13,7 @@ const planningCenterConfig = { applicationId, secret, pageSize, format, destinat
 const planningCenterExport = new PlanningCenter(planningCenterConfig);
 
 // await exportToFile(PlanningCenterEntities.addresses, planningCenterConfig);
-await exportToFile(PlanningCenterEntities.campuses, planningCenterConfig);
+// await exportToFile(PlanningCenterEntities.campuses, planningCenterConfig);
 // await exportToFile(PlanningCenterEntities.checkins, planningCenterConfig);
 // await exportToFile(PlanningCenterEntities.emails, planningCenterConfig);
 // await exportToFile(PlanningCenterEntities.events, planningCenterConfig);
@@ -27,6 +27,7 @@ await exportToFile(PlanningCenterEntities.campuses, planningCenterConfig);
 // await exportToFile(PlanningCenterEntities.people, planningCenterConfig);
 // await exportToFile(PlanningCenterEntities.peopleStats, planningCenterConfig);
 // await exportToFile(PlanningCenterEntities.peopleTabs, planningCenterConfig, { "tab": "custom_tab_slug_name" });
+await exportToFile(PlanningCenterEntities.peopleTabs, planningCenterConfig, { "tab": "involvement" });
 
 
 async function exportToFile(entity, config, options) {

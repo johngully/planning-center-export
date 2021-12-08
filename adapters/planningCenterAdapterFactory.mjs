@@ -25,11 +25,11 @@ function defaultJsonTransform(json) {
 // Returns a function that can be used as an adapter
 // This function calls the url and writes the results in csv format to a file
 export function createCsvAdapter(url, transform = defaultCsvTransform) {
-  return async (config, filePath) => {
+  return async (config, filePath, options) => {
     const api = new PlanninerCenterApiHelper(config.applicationId, config.secret, config.pageSize);
     startCsvFile(filePath);
     const result = await api.getAll(url, (json, page) => {
-      const data = transform(json);
+      const data = transform(json, options);
       appendJsonArrayToCsvFile(filePath, data, page);
     });
     endCsvFile(filePath);
@@ -40,11 +40,11 @@ export function createCsvAdapter(url, transform = defaultCsvTransform) {
 // Returns a function that can be used as an adapter
 // This function calls the url and writes the results to a file
 export function createJsonAdapter(url, transform = defaultJsonTransform) {
-  return async (config, filePath) => {
+  return async (config, filePath, options) => {
     const api = new PlanninerCenterApiHelper(config.applicationId, config.secret, config.pageSize);
     startJsonFile(filePath);
     const result = await api.getAll(url, (json, page) => {
-      const data = transform(json);
+      const data = transform(json, options);
       appendJsonToFile(filePath, data, page);
     });
     endJsonFile(filePath);
